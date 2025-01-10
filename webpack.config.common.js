@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const autoprefixer = require('autoprefixer')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = {
@@ -36,15 +37,25 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
+          // MiniCssExtractPlugin.loader,
+          // 'css-loader',
           {
+            // Adds CSS to the DOM by injecting a `<style>` tag
+            loader: MiniCssExtractPlugin.loader,
+          },
+
+          {
+            // Loader for webpack to process CSS with PostCSS
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                plugins: [require('postcss-preset-env')],
+                plugins: [autoprefixer],
               },
             },
+          },
+          {
+            // Loads a SASS/SCSS file and compiles it to CSS
+            loader: 'sass-loader',
           },
         ],
       },
