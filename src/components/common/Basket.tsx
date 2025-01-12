@@ -1,8 +1,12 @@
 import { log } from 'console'
 import { initialData } from '../../mockData/initialData'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { decrementAction, incrementAction } from '../../store/actions'
+import { useSelector } from 'react-redux'
 
 export function Basket() {
-  const orders = initialData
+  const orders = useAppSelector((state) => state.order)
+  const dispatch = useAppDispatch()
   const total: number = orders.reduce((acc, order) => {
     return acc + order.count * order.price
   }, 0)
@@ -16,12 +20,24 @@ export function Basket() {
           Корзина
         </li>
         {orders.map((order) => (
-          <li className=" list-group-item p-1">
+          <li key={order.id} className=" list-group-item p-1">
             <div className="d-flex justify-content-between">
               <div className="">
                 <p>{order.title}</p>
               </div>
               <div className="d-flex">
+                <button
+                  className="btn btn-outline-success "
+                  onClick={() => dispatch(incrementAction(order.id))}
+                >
+                  +
+                </button>
+                <button
+                  onClick={() => dispatch(decrementAction(order.id))}
+                  className="btn btn-outline-warning mx-1"
+                >
+                  -
+                </button>
                 <button className="btn btn-outline-success mx-1 px-1">
                   {order.count}
                 </button>

@@ -1,9 +1,10 @@
-import { log } from 'console'
-import { initialData } from '../../mockData/initialData'
 import { ProductDefault } from '../page/ProductDefault'
+import { useAppSelector } from '../../store/hooks'
 
 export function ProductList() {
-  const products = initialData
+  const products = useAppSelector((state) => state.products)
+  // console.log(products)
+
   if (!products) return 'Something twrong'
   return (
     <div className="container mx-auto p-2">
