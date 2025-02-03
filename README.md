@@ -1,7 +1,8 @@
 Проект, реализации корзины  на таких технологиях
+- TypeScript,
 - Webpack,
 - Bootstrap,
-- RTK вщзможно добавлю RTQ
+- Redux, RTK, возможно добавлю RTQ
 для запуска
  - утановите зависимости npm install
- - npm start
+ -  далее npm start
